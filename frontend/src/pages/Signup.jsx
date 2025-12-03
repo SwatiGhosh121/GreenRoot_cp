@@ -12,11 +12,14 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
         try {
             await signup(name, email, password);
             navigate('/dashboard');
         } catch (err) {
-            setError('Error creating account');
+            console.error('Signup error:', err);
+            const errorMessage = err.response?.data?.message || err.message || 'Error creating account. Please try again.';
+            setError(errorMessage);
         }
     };
 

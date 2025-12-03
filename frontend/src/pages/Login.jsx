@@ -11,11 +11,14 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
         try {
             await login(email, password);
             navigate('/dashboard');
         } catch (err) {
-            setError('Invalid credentials');
+            console.error('Login error:', err);
+            const errorMessage = err.response?.data?.message || err.message || 'Login failed. Please try again.';
+            setError(errorMessage);
         }
     };
 

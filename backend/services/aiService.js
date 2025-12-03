@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const AI_SERVICE_URL = 'http://localhost:5001/predict';
+const AI_SERVICE_URL = process.env.AI_SERVICE_URL || 'http://localhost:5001/predict';
 
 exports.getRecommendation = async (ph, temperature, rainfall) => {
     try {

@@ -26,10 +26,10 @@ const Navbar = () => {
                             <Link to="/dashboard" className="hover:text-secondary transition">Dashboard</Link>
                             <Link to="/recommend" className="hover:text-secondary transition">Get Recommendation</Link>
                             <div className="flex items-center space-x-4 ml-4">
-                                <span className="flex items-center space-x-1">
+                                <Link to="/dashboard" className="flex items-center space-x-1 hover:text-secondary transition" title="Go to Dashboard">
                                     <User size={18} />
                                     <span>{user.name}</span>
-                                </span>
+                                </Link>
                                 <button
                                     onClick={handleLogout}
                                     className="flex items-center space-x-1 bg-red-500 hover:bg-red-600 px-3 py-1 rounded transition"

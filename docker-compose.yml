@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: greenroot-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - greenroot-network
+
+  # Backend API
+  backend:
+    build: ./backend
+    container_name: greenroot-backend
+    restart: always
+    ports:
+      - "5002:5002"
+    environment:
+      DB_HOST: db
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      JWT_SECRET: ${JWT_SECRET}
+      PORT: 5002
+      AI_SERVICE_URL: http://ai-service:5001/predict
+      NODE_ENV: production
+    depends_on:
+      - db
+    networks:
+      - greenroot-network
+
+  # AI Service
+  ai-service:
+    build: ./ai-service
+    container_name: greenroot-ai
+    restart: always
+    ports:
+      - "5001:5001"
+    environment:
+      PORT: 5001
+    networks:
+      - greenroot-network
+
+  # Frontend
+  frontend:
+    build: ./frontend
+    container_name: greenroot-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+      - ai-service
+    networks:
+      - greenroot-network
+
+volumes:
+  db_data:
+
+networks:
+  greenroot-network:
+    driver: bridge
