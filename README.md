@@ -1,276 +1,39 @@
-<<<<<<< HEAD
-GreenRoot - AI-Powered Crop Recommendation System
+1. Project Title GreenRoot – An AI-Powered Crop Recommendation and Farm Management System.
 
-An intelligent farm management system that provides AI-powered crop recommendations based on soil conditions, weather data, and farm parameters.
-🌟 Features
-=======
-<<<<<<< HEAD
-# GreenRoot_cp
-GreenRoot – An AI-Powered Crop Recommendation System for Farmers
-=======
-# GreenRoot - AI-Powered Crop Recommendation System
+2. Problem Statement Many farmers face difficulties in selecting the right crop due to unpredictable weather, soil conditions, and market fluctuations. This leads to       reduced yield and financial loss. GreenRoot helps farmers by providing AI-driven crop recommendations based on soil pH, temperature, and rainfall data. It also          allows farmers to store, view, update, and manage farm data using an interactive web platform with a secure relational database.
 
-An intelligent farm management system that provides AI-powered crop recommendations based on soil conditions, weather data, and farm parameters.
+3. System Architecture Frontend (React.js) → Backend (Node.js + Express API) → Database (MySQL) → AI Module (Flask / TensorFlow) Frontend → Backend (API) → Database        Example stack:
 
-## 🌟 Features
->>>>>>> fix-auth
+Frontend: React.js with React Router (for pages like Login, Dashboard, and Crop Suggestion)
 
-- **User Authentication**: Secure signup and login with JWT
-- **Farm Management**: Add, view, and manage multiple farms
-- **Soil Data Tracking**: Record and monitor soil parameters
-- **AI Crop Recommendations**: Get intelligent crop suggestions based on pH, temperature, and rainfall
-- **Weather Integration**: Track weather conditions for better farm management
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
+Backend: Node.js + Express.js REST API (handles CRUD + AI requests)
 
-<<<<<<< HEAD
-🏗️ Architecture
+Database:MySQL (Relational database with structured tables and relationships)
 
-=======
-## 🏗️ Architecture
+Authentication: MySQL (Relational database with structured tables and relationships)
 
-```
->>>>>>> fix-auth
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   Frontend  │────▶│   Backend   │────▶│  AI Service │
-│  (React)    │     │  (Node.js)  │     │  (Python)   │
-└─────────────┘     └─────────────┘     └─────────────┘
-                           │
-                           ▼
-                    ┌─────────────┐
-                    │   Database  │
-                    │   (MySQL)   │
-                    └─────────────┘
-<<<<<<< HEAD
-🛠️ Tech Stack
- Frontend
-=======
-```
+AI Module: Python (Flask API) integrated with trained ML model
 
-## 🛠️ Tech Stack
+Hosting: ○ Frontend → Vercel / Netlify ○ Backend → Render / Railway ○ Database → MySQL on Aiven / Railway / PlanetScale
 
-### Frontend
->>>>>>> fix-auth
-- React 18
-- Vite
-- TailwindCSS
-- React Router
-- Axios
-- Lucide Icons
+4. Key Features Category Features Authentication & Secure farmer registration and login using JWT (with bcrypt password encryption) Authorization
 
-<<<<<<< HEAD
-Backend
-=======
-### Backend
->>>>>>> fix-auth
-- Node.js
-- Express.js
-- Sequelize ORM
-- MySQL
-- JWT Authentication
-- bcrypt
+  1. CRUD Operations (API + DB) Farmers can create, read, update, and delete farm and soil data using REST APIs connected to MySQL tables.
 
-<<<<<<< HEAD
-AI Service
-=======
-### AI Service
->>>>>>> fix-auth
-- Python 3.11
-- Flask
-- Scikit-learn
-- Pandas
-- NumPy
+  2. Search, Sort, Filter, PaginationSQL queries support filtering by crop or region, sorting by pH or rainfall, and pagination using LIMIT/OFFSET.
 
-<<<<<<< HEAD
+  3. AI Crop Recommendation Suggests the best crop for given soil and weather parameters using a trained machine learning model.
 
-API Documentation
+  4. Frontend Routing Pages: Home, Login, Signup, Dashboard, Add Farm, Crop Recommendation.
 
- Authentication
-- `POST /api/auth/signup` - Create new user
-- `POST /api/auth/login` - Login user
+  5. Weather Integration Fetches real-time temperature and rainfall data via the OpenWeather API.
 
- Farms
-=======
-## 🚀 Quick Start (Local Development)
+  6. Hosting Fully hosted: Frontend (Vercel/Netlify), Backend(Render/Railway), Database (MySQL).
 
-### Prerequisites
-- Node.js >= 18.0.0
-- Python >= 3.11
-- MySQL >= 8.0
-- npm >= 9.0.0
+Tech Stack Layer Technologies Used Frontend React.js, React Router, Axios, TailwindCSS /Bootstrap Database MySQL (Relational) Backend Node.js, Express.js Authentication JWT, bcrypt AI Integration Python (Flask API), TensorFlow / scikit-learn
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/YOUR_USERNAME/greenroot.git
-cd greenroot
-```
+API Overview Endpoint Method Description Access /api/auth/signup POST Register new farmer Public /api/auth/login POST Authenticate farmer Public /api/farms GET Get all farms (search, sort, filter, pagination using SQL queries) Authenticated /api/farms/:id GET Get single farm details Authenticated /api/farms POST Add new farm record Authenticated /api/farms/:id PUT Update existing farm details Authenticated /api/farms/:id DELETE Delete farm record Authenticated /api/recommend POST AI crop recommendation Authenticated
 
-### 2. Setup Database
-```sql
-CREATE DATABASE greenroot;
-```
+Database Design Main Tables: ●Users ○id, name, email, password ●Farms ○id, user_id, farm_name, location ●SoilData ○id, farm_id, ph, temperature, rainfall, recommended_crop
 
-### 3. Setup Backend
-```bash
-cd backend
-npm install
-cp .env.example .env
-# Edit .env with your database credentials
-npm run dev
-```
-
-### 4. Setup AI Service
-```bash
-cd ai-service
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-python app.py
-```
-
-### 5. Setup Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-### 6. Access the Application
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:5002
-- AI Service: http://localhost:5001
-
-## 📦 Deployment
-
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
-
-### Quick Deploy with Docker
-```bash
-# Copy environment variables
-cp backend/.env.example backend/.env
-# Edit backend/.env with your values
-
-# Start all services
-docker-compose up -d
-```
-
-### Deploy to Render (Recommended)
-1. Push code to GitHub
-2. Create a Render account
-3. Follow the step-by-step guide in [DEPLOYMENT.md](./DEPLOYMENT.md)
-
-## 📝 Environment Variables
-
-### Backend (.env)
-```env
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=greenroot
-JWT_SECRET=your_jwt_secret
-PORT=5002
-AI_SERVICE_URL=http://localhost:5001/predict
-ALLOWED_ORIGINS=http://localhost:5173
-NODE_ENV=development
-```
-
-### Frontend (.env)
-```env
-VITE_API_URL=http://localhost:5002/api
-```
-
-## 🧪 Testing
-
-### Test Backend
-```bash
-cd backend
-node test_signup.js
-```
-
-### Test API Endpoints
-```bash
-# Signup
-curl -X POST http://localhost:5002/api/auth/signup \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Test User","email":"test@example.com","password":"password123"}'
-
-# Login
-curl -X POST http://localhost:5002/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com","password":"password123"}'
-```
-
-## 📚 API Documentation
-
-### Authentication
-- `POST /api/auth/signup` - Create new user
-- `POST /api/auth/login` - Login user
-
-### Farms
->>>>>>> fix-auth
-- `GET /api/farms` - Get all farms (authenticated)
-- `POST /api/farms` - Create farm (authenticated)
-- `GET /api/farms/:id` - Get farm details (authenticated)
-- `PUT /api/farms/:id` - Update farm (authenticated)
-- `DELETE /api/farms/:id` - Delete farm (authenticated)
-
-<<<<<<< HEAD
- Soil Data
-- `GET /api/soil/:farmId` - Get soil data for farm
-- `POST /api/soil` - Add soil data
-
-Weather
-- `GET /api/weather/:location` - Get weather data
-
-Recommendations
-=======
-### Soil Data
-- `GET /api/soil/:farmId` - Get soil data for farm
-- `POST /api/soil` - Add soil data
-
-### Weather
-- `GET /api/weather/:location` - Get weather data
-
-### Recommendations
->>>>>>> fix-auth
-- `POST /api/recommend` - Get crop recommendation
-  ```json
-  {
-    "ph": 6.5,
-    "temperature": 25,
-    "rainfall": 150
-  }
-  ```
-<<<<<<< HEAD
-=======
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the ISC License.
-
-## 👥 Authors
-
-- Your Name - Initial work
-
-## 🙏 Acknowledgments
-
-- OpenWeather API for weather data
-- Scikit-learn for ML capabilities
-- React and Vite communities
-
-## 📞 Support
-
-For support, email your-email@example.com or open an issue in the repository.
-
----
-
-Made with ❤️ by GreenRoot Team
->>>>>>> 8898271 (Initial commit)
->>>>>>> fix-auth
+Relationships: ●One user → many farms ●One farm → one soil record
