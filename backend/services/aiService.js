@@ -1,6 +1,10 @@
 const axios = require('axios');
 
+<<<<<<< HEAD
 const AI_SERVICE_URL = process.env.AI_SERVICE_URL || 'http://localhost:5001/predict';
+=======
+const AI_SERVICE_URL = 'http://localhost:5001/predict';
+>>>>>>> fix-auth
 
 exports.getRecommendation = async (ph, temperature, rainfall) => {
     try {

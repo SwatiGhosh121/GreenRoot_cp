@@ -5,7 +5,11 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
+<<<<<<< HEAD
 const PORT = process.env.PORT || 5000;
+=======
+const PORT = process.env.PORT || 5002;
+>>>>>>> fix-auth
 
 const { sequelize } = require('./models');
 const authRoutes = require('./routes/authRoutes');
@@ -14,6 +18,7 @@ const soilRoutes = require('./routes/soilRoutes');
 const weatherRoutes = require('./routes/weatherRoutes');
 const recommendationRoutes = require('./routes/recommendationRoutes');
 
+<<<<<<< HEAD
 // CORS configuration
 const allowedOrigins = process.env.ALLOWED_ORIGINS
     ? process.env.ALLOWED_ORIGINS.split(',')
@@ -31,6 +36,9 @@ app.use(cors({
     },
     credentials: true
 }));
+=======
+app.use(cors());
+>>>>>>> fix-auth
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
