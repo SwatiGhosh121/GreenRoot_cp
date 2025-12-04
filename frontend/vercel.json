@@ -1,0 +1,18 @@
+{
+  "version": 3,
+  "projects": {
+    "rootDirectory": "src"
+  },
+  "builds": [
+    {
+      "src": "src/package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/index.js"
+    }
+  ]
+}
