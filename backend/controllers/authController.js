@@ -1,13 +1,13 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { User } = require('../models');
+const { User } = require('./../utils/prisma.js');
 
 exports.signup = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
         // Check if user exists
-        const existingUser = await User.findOne({ where: { email } });
+        const existingUser = await User.findUnique({ where: { email } });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
@@ -17,11 +17,7 @@ exports.signup = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // Create user
-        const user = await User.create({
-            name,
-            email,
-            password: hashedPassword,
-        });
+        const user = await User.create({ data: { name, email, password: hashedPassword } });
 
         // Generate JWT
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
@@ -37,7 +33,7 @@ exports.login = async (req, res) => {
         const { email, password } = req.body;
 
         // Check user
-        const user = await User.findOne({ where: { email } });
+        const user = await User.findUnique({ where: { email } });
         if (!user) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }

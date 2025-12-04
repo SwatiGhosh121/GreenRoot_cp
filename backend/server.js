@@ -8,7 +8,7 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-const { sequelize } = require('./models');
+const { prisma } = require('./utils/prisma');
 const authRoutes = require('./routes/authRoutes');
 const farmRoutes = require('./routes/farmRoutes');
 const soilRoutes = require('./routes/soilRoutes');
@@ -28,11 +28,16 @@ app.get('/', (req, res) => {
     res.send('GreenRoot API is running');
 });
 
-sequelize.sync({ force: false }).then(() => {
-    console.log('Database synced');
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
-}).catch(err => {
-    console.error('Database sync error:', err);
-});
+// Connect Prisma and start server
+(async () => {
+    try {
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    } catch (err) {
+        console.error('Prisma connection error:', err);
+        process.exit(1);
+    }
+})();
+
+
