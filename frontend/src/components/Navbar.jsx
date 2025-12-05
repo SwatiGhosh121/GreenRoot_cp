@@ -26,9 +26,13 @@ const Navbar = () => {
                             <Link to="/dashboard" className="hover:text-secondary transition">Dashboard</Link>
                             <Link to="/recommend" className="hover:text-secondary transition">Get Recommendation</Link>
                             <div className="flex items-center space-x-4 ml-4">
-                                <Link to="/dashboard" className="flex items-center space-x-1 hover:text-secondary transition" title="Go to Dashboard">
+                                <Link 
+                                    to="/profile"
+                                    className="flex items-center space-x-1 hover:text-secondary transition"
+                                    title="Profile"
+                                >
                                     <User size={18} />
-                                    <span>{user.name}</span>
+                                    <span>Profile</span>
                                 </Link>
                                 <button
                                     onClick={handleLogout}

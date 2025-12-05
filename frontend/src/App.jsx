@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import AddFarm from './pages/AddFarm';
 import FarmDetails from './pages/FarmDetails';
 import CropRecommendation from './pages/CropRecommendation';
+import Profile from './pages/profile';
 
 const PrivateRoute = ({ children }) => {
     const { user, loading } = React.useContext(AuthContext);
@@ -58,6 +59,7 @@ const App = () => {
                         }
                     />
                     <Route path="/" element={<Navigate to="/dashboard" />} />
+                    <Route path="/profile" element={<Profile />} />
                 </Routes>
             </div>
         </AuthProvider>
