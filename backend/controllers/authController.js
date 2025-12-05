@@ -52,3 +52,43 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
+
+exports.updateProfile = async (req, res) => {
+    try {
+        const { name, email } = req.body;
+        const userId = req.user.id;
+
+        // Update user
+        const updatedUser = await User.update({
+            where: { id: userId },
+            data: { name, email }
+        });
+
+        return res.json({
+            message: "Profile updated successfully",
+            user: {
+                id: updatedUser.id,
+                name: updatedUser.name,
+                email: updatedUser.email,
+                createdAt: updatedUser.createdAt
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+};
+
+exports.deleteAccount = async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        // Delete user
+        await User.delete({
+            where: { id: userId }
+        });
+
+        res.json({ message: "Account deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+};
